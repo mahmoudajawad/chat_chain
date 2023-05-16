@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chat_chain"
+authors = [
+    {name = "Mahmoud Abduljawad", email = "me@mahmoudajawad.com"},
+]
+description = "Simple chain toolings to build conversational applications"
+requires-python = ">=3.11"
+keywords = ["openai", "gpt", "conversational", "chat", "bot", "ai"]
+license = {text = "AGPLv3"}
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "openai==0.27.2",
+  "pandas==1.5.3",
+  "scikit-learn==1.2.2",
+  "scipy==1.10.1",
+  "matplotlib==3.7.1",
+  "plotly==5.13.1",
+  "tiktoken==0.3.2",
+  "qdrant-client==1.1.1",
+  "motor==3.1.2",
+]
+dynamic = ["version", "readme"]
+
+[tool.setuptools.dynamic]
+version = {attr = "chat_chain.VERSION"}
+readme = {file = ["README.md"]}
+
+[project.optional-dependencies]
+dev = [
+  "black==22.10.0",
+  "isort==5.10.1",
+  "mypy==1.2.0",
+  "mypy-extensions==1.0.0",
+  "pylint==2.17.3",
+  "pyls-isort==0.2.2",
+  "pylsp-mypy==0.6.6",
+  "python-lsp-black==1.2.1",
+  "python-lsp-jsonrpc==1.0.0",
+  "python-lsp-server==1.7.2",
+]
+
+[tool.pylint.basic]
+# Allow shorter and longer variable names than the default.
+argument-rgx = "[a-z_][a-z0-9_]*$"
+attr-rgx = "[a-z_][a-z0-9_]*$"
+variable-rgx = "[A-Z][A-Z0-9_]*$|[a-z_][a-z0-9_]*$"
+
+[[tool.mypy.overrides]]
+module = [
+    "bson",
+    "pymongo",
+    "pymongo.errors",
+    "motor.motor_asyncio",
+]
+ignore_missing_imports = true
