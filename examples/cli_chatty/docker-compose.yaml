@@ -1,0 +1,25 @@
+version: "3.4"
+
+services:
+
+  # QDrant
+  qdrant:
+    image: "docker.io/qdrant/qdrant:v1.0.1"
+    restart: on-failure
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+
+  # MongoDB
+  mongodb:
+    image: "docker.io/library/mongo:6.0.3"
+    restart: on-failure
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_volume:/data/db
+
+
+volumes:
+  # MongoDB Volumes
+  mongodb_volume:
